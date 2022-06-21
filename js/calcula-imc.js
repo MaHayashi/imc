@@ -1,5 +1,5 @@
 var titulo = document.querySelector(".titulo"); // variavel titulo, busca a classe de css, para não ter problema se alguém mudar o (html) h1 para h2 por ex
-titulo.textContent = "Aparecida Nutricionista"; //textContent mostra o conteudo dentro da variavel titulo, e  o sinal de igual muda o texto
+titulo.textContent = "Poli Nutri"; //textContent mostra o conteudo dentro da variavel titulo, e  o sinal de igual muda o texto
 
 //Evento escutar toda vez que o aparecida nutricionista for clicado
 titulo.addEventListener("click", mostraMensagem);
@@ -10,8 +10,10 @@ function mostraMensagem(){ //cria a função de mostrar a mensagem dentro do con
 
 
 // Calculando IMC
+var pacientes = document.querySelectorAll(".paciente");
+
 for (var i = 0; i < pacientes.length; i++){
-    var paciente = document.querySelector ("#primeiro-paciente"); //chama id através de #
+    var paciente = pacientes [i];
     var tdPeso = paciente.querySelector(".info-peso"); //cria a variavel tdPeso e seleciona a info-peso
     var peso = tdPeso.textContent; //volta o conteúdo da variável tdPeso
 
@@ -34,8 +36,15 @@ for (var i = 0; i < pacientes.length; i++){
         tdImc.textContent = "Altura inválida";
     }
     if (alturaEhValida && pesoEhValido){
-    var imc = peso / (altura * altura);
-    tdImc.textContent = imc; //substituiu o conteudo do tdImc pelo resultado da variavél imc
-    console.log(imc); //printa o resultado no console
+        var imc = calculaImc(peso,altura);
+        tdImc.textContent = imc; //substituiu o conteudo do tdImc pelo resultado da variavél imc
     }
+}
+
+function calculaImc(peso, altura){ //reuso de código, cria a funcao para chamar no form.js
+    var imc = 0;
+
+    imc = peso / (altura * altura);
+
+    return imc.toFixed(2);
 }
